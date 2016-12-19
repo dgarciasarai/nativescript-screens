@@ -15,7 +15,7 @@ export class ImageGalleryComponent implements OnInit {
     constructor(private screensContext: ScreensContext) {}
 
     ngOnInit() {
-        console.log('trying to render');
+        console.log('trying to render gallery');
 
         let context = app.android.context;
 

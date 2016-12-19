@@ -1,11 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ScreensContext } from "../../shared/context/screens-context.service";
-import app = require("application");
 import { Router } from "@angular/router";
+import app = require("application");
 
 declare var com: any;
-
-var frameModule = require("ui/frame");
 
 @Component({
     selector: "signup",
@@ -19,29 +17,34 @@ export class SignUpComponent implements OnInit {
 
     ngOnInit() {
 
-        console.log('trying to render');
+        console.log('trying to render sign up');
 
         let context = app.android.context;
         let signUp = new com.liferay.mobile.screens.auth.signup.SignUpScreenlet(app.android.context);
         signUp.setCompanyId(this.screensContext.COMPANY_ID);
         signUp.setAnonymousApiUserName(this.screensContext.ANONYMOUS_API_USERNAME);
         signUp.setAnonymousApiPassword(this.screensContext.ANONYMOUS_API_PASSWORD);
+        signUp.setAutoLogin(true);
+
+        let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
+        signUp.setCredentialsStorage(credentials);
+
+        let email = com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL;
+        signUp.setBasicAuthMethod(email);
 
         let layout = context.getResources().getIdentifier("sign_up_default", "layout", context.getPackageName());
         signUp.render(layout);
 
-        //Navigates directly to ImageGalleryScreenlet but it appears empty
-        this.router.navigate(['gallery']);
+        let self = this;
 
         signUp.setListener(new com.liferay.mobile.screens.auth.signup.SignUpListener({
 
             onSignUpFailure(param0: java.lang.Exception): void {
-                console.log("failed");
+                console.log("failed sign up");
             },
             onSignUpSuccess(param0: any): void {
-                console.log("success");
-                // FIX-ME This is not working
-                // this.router.navigate(['gallery']);
+                console.log("success sign up");
+                self.router.navigate(['/gallery']);
             }
 
         }));
