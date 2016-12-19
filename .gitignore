@@ -1,6 +1,5 @@
 *.js
 *.js.map
-*.d.ts
 !index.d.ts
 lib/
 app/*.js/
