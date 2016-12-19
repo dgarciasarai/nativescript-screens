@@ -20,10 +20,21 @@ export class ImageGalleryComponent implements OnInit {
         let context = app.android.context;
 
         let gallery = new com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet(context);
+
         gallery.setRepositoryId(this.screensContext.GROUP_ID);
         gallery.setFolderId(this.screensContext.IMAGE_GALLERY_FOLDER_ID);
-
+        gallery.setAutoLoad(true);
+        gallery.setGroupId(this.screensContext.GROUP_ID);
+        gallery.setFirstPageSize(10);
+        gallery.setPageSize(10);
+        let remoteOnly = com.liferay.mobile.screens.cache.CachePolicy.REMOTE_ONLY;
+        gallery.setCachePolicy(remoteOnly);
+        let picasso = com.liferay.mobile.screens.context.PicassoScreens;
+        picasso.setCachePolicy(remoteOnly);
+        let localeUS = java.util.Locale.US;
+        gallery.setLocale(localeUS);
         let layout = context.getResources().getIdentifier("gallery_custom", "layout", context.getPackageName());
+
         gallery.render(layout);
 
         console.log(gallery);
