@@ -4,7 +4,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { AppComponent } from "./app.component";
 import { ImageGalleryComponent } from "./pages/gallery/gallery.component";
 import { SignUpComponent } from "./pages/signup/signup.component";
-import { routes, navigatableComponents } from "./app.routing";
+import { routes } from "./app.routing";
 
 @NgModule({
     imports: [
@@ -15,8 +15,7 @@ import { routes, navigatableComponents } from "./app.routing";
     declarations: [
         AppComponent,
         SignUpComponent,
-        ImageGalleryComponent,
-        ...navigatableComponents
+        ImageGalleryComponent
     ],
     bootstrap: [AppComponent]
 })
