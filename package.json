@@ -1,6 +1,8 @@
 {
   "name": "nativescript-screens",
   "description": "PoC: NativeScript + Liferay Screens",
+  "repository": "https://github.com/dgarciasarai/nativescript-screens",
+  "license": "GPL-1.0",
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-android": {
