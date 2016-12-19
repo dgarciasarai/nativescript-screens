@@ -1,0 +1,11 @@
+*.js
+*.js.map
+*.d.ts
+!index.d.ts
+lib/
+app/*.js/
+*.d.ts/
+platforms/
+node_modules/
+.idea/
+*.DS_Store

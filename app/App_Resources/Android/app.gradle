@@ -1,0 +1,21 @@
+dependencies {
+	compile 'com.android.support:recyclerview-v7:+'
+	compile 'com.liferay.mobile:liferay-screens:2.0.2.beta-3'
+}
+
+repositories {
+  maven {
+    url  "https://dl.bintray.com/nhpatt/liferay-mobile"
+  }
+}
+
+android {  
+  defaultConfig {  
+    generatedDensities = []
+    applicationId = "org.nativescript.demo"
+  
+  }  
+  aaptOptions {  
+    additionalParameters "--no-version-vectors"  
+  }  
+} 
