@@ -15,6 +15,7 @@ import { routes, navigatableComponents } from "./app.routing";
     declarations: [
         AppComponent,
         SignUpComponent,
+        ImageGalleryComponent,
         ...navigatableComponents
     ],
     bootstrap: [AppComponent]

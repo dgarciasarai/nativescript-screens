@@ -30,6 +30,9 @@ export class SignUpComponent implements OnInit {
         let layout = context.getResources().getIdentifier("sign_up_default", "layout", context.getPackageName());
         signUp.render(layout);
 
+        //Navigates directly to ImageGalleryScreenlet but it appears empty
+        this.router.navigate(['gallery']);
+
         signUp.setListener(new com.liferay.mobile.screens.auth.signup.SignUpListener({
 
             onSignUpFailure(param0: java.lang.Exception): void {
@@ -37,6 +40,8 @@ export class SignUpComponent implements OnInit {
             },
             onSignUpSuccess(param0: any): void {
                 console.log("success");
+                // FIX-ME This is not working
+                // this.router.navigate(['gallery']);
             }
 
         }));
