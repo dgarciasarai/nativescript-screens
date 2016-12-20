@@ -10,7 +10,7 @@
             android:id="@+id/recycler_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/ns_primaryDark">
+            android:background="@color/ns_white">
 
         <ProgressBar
                 android:id="@+id/liferay_progress"
