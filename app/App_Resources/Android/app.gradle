@@ -1,6 +1,6 @@
 dependencies {
 	compile 'com.android.support:recyclerview-v7:+'
-	compile 'com.liferay.mobile:liferay-screens:2.0.2.beta-4'
+	compile 'com.liferay.mobile:liferay-screens:2.0.2.beta-6'
 }
 
 repositories {
@@ -17,5 +17,6 @@ android {
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
-  }  
+  }
+
 } 
