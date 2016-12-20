@@ -7,7 +7,7 @@ declare var com: any;
 @Component({
     selector: "gallery",
     providers: [ScreensContext],
-    templateUrl: "pages/gallery/gallery.html",
+    template: ``,
     styleUrls: ["pages/gallery/gallery-common.css"]
 })
 export class ImageGalleryComponent implements OnInit {

@@ -8,7 +8,7 @@ declare var com: any;
 @Component({
     selector: "signup",
     providers: [ScreensContext],
-    templateUrl: "pages/signup/signup.html",
+    template: ``,
     styleUrls: ["pages/signup/signup-common.css"]
 })
 export class SignUpComponent implements OnInit {
@@ -88,11 +88,11 @@ export class SignUpComponent implements OnInit {
 
         signUp.setListener(new com.liferay.mobile.screens.auth.signup.SignUpListener({
 
-            onSignUpFailure(param0: java.lang.Exception): void {
-                console.log("failed sign up");
+            onSignUpFailure(e: java.lang.Exception): void {
+                console.log("failed sign up" + e);
             },
-            onSignUpSuccess(param0: any): void {
-                console.log("success sign up");
+            onSignUpSuccess(user: any): void {
+                console.log("success sign up" + user);
                 self.router.navigate(['/gallery']);
             }
 
