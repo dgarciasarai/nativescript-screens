@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import "rxjs/add/operator/map";
 import app = require("application");
 
-declare var com: any;
-declare var LiferayServerContext: any;
+declare let com: any;
+declare let LiferayServerContext: any;
 
 @Injectable()
 export class ScreensContext {
@@ -34,6 +34,11 @@ export class ScreensContext {
             LiferayServerContext.groupId = this.GROUP_ID;
             LiferayServerContext.server = this.SERVER;
             LiferayServerContext.serverVersion = this.SERVER_VERSION_IOS;
+
+            console.log("companyId:" + LiferayServerContext.companyId);
+            console.log(LiferayServerContext.groupId);
+            console.log(LiferayServerContext.server);
+            console.log(LiferayServerContext.serverVersion);
         }
     }
 }

@@ -3,9 +3,11 @@ import {ScreensContext} from "../../shared/context/screens-context.service";
 import {Router} from "@angular/router";
 import app = require("application");
 
-declare var com: any;
-declare var UILabel: any;
-declare var CGRectMake: any;
+declare let com: any;
+declare let LoginScreenlet: any;
+declare let CGRectMake: any;
+
+let colorModule = require("color");
 
 @Component({
     selector: "signup",
@@ -26,11 +28,13 @@ export class SignUpComponent implements OnInit {
 
     renderLogin() {
         console.log('trying to render login');
+
         let self = this;
+        let login;
 
         if (app.android) {
             let context = app.android.context;
-            let login = new com.liferay.mobile.screens.auth.login.LoginScreenlet(app.android.context);
+            login = new com.liferay.mobile.screens.auth.login.LoginScreenlet(app.android.context);
             let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
             login.setCredentialsStorage(credentials);
 
@@ -62,12 +66,12 @@ export class SignUpComponent implements OnInit {
         } else {
             console.log("iOS!!!!");
 
-            var text2 = new UILabel(CGRectMake(0, 20, 100, 30));
-            text2.text = "Hello iOS!";
+            login = new LoginScreenlet(CGRectMake(0, 20, 300, 500));
 
-            console.log(text2.text);
+            console.log("login screenlet ios: " + login);
+            console.log("theme name: " + login.themeName);
 
-            app.ios.rootController.view.addSubview(text2);
+            app.ios.rootController.view.addSubview(login);
         }
     }
 
