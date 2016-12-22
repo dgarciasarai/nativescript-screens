@@ -12,7 +12,8 @@ declare var com: any;
 })
 export class ImageGalleryComponent implements OnInit {
 
-    constructor(private screensContext: ScreensContext) {}
+    constructor(private screensContext: ScreensContext) {
+    }
 
     ngOnInit() {
         console.log('trying to render gallery');

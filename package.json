@@ -7,6 +7,9 @@
     "id": "org.nativescript.demo",
     "tns-android": {
       "version": "2.4.1"
+    },
+    "tns-ios": {
+      "version": "2.4.0"
     }
   },
   "dependencies": {
@@ -22,6 +25,7 @@
     "nativescript-theme-core": "^0.2.6",
     "reflect-metadata": "~0.1.8",
     "rxjs": "5.0.0-beta.12",
+    "screens-plugin": "file:../screens-plugin",
     "tns-core-modules": "^2.5.0-2016-12-07-4948"
   },
   "devDependencies": {

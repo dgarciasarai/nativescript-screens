@@ -1,15 +1,22 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "sourceMap": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "noEmitHelpers": true,
-        "noEmitOnError": true
-    },
-    "exclude": [
-        "node_modules",
-        "platforms"
+  "compilerOptions": {
+    "noEmitOnError": true,
+    "noEmitHelpers": true,
+    "sourceMap": true,
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "noImplicitUseStrict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "pretty": true,
+    "lib": [
+      "es2016"
     ]
+  },
+  "exclude": [
+    "node_modules",
+    "platforms"
+  ]
 }

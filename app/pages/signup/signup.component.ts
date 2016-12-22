@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import app = require("application");
 
 declare var com: any;
+declare var UILabel: any;
+declare var CGRectMake: any;
 
 @Component({
     selector: "signup",
@@ -24,36 +26,49 @@ export class SignUpComponent implements OnInit {
 
     renderLogin() {
         console.log('trying to render login');
-
-        let context = app.android.context;
-        let login = new com.liferay.mobile.screens.auth.login.LoginScreenlet(app.android.context);
-        let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
-        login.setCredentialsStorage(credentials);
-
-        let layout = context.getResources().getIdentifier("login_default", "layout", context.getPackageName());
-
-        let layoutInflater = android.view.LayoutInflater;
-        let view: any = layoutInflater.from(context).inflate(layout, null);
-        let email = com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL;
-        view.setBasicAuthMethod(email);
-
-        let basic = com.liferay.mobile.screens.context.AuthenticationType.BASIC;
-        view.setAuthenticationType(basic);
-        login.assignView(view);
-
         let self = this;
 
-        login.setListener(new com.liferay.mobile.screens.auth.login.LoginListener({
-            onLoginSuccess(user: any): void {
-                console.log(user)
-                self.router.navigate(['/gallery']);
-            },
-            onLoginFailure(error: any): void {
-                console.log(error);
-            }
-        }));
+        if (app.android) {
+            let context = app.android.context;
+            let login = new com.liferay.mobile.screens.auth.login.LoginScreenlet(app.android.context);
+            let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
+            login.setCredentialsStorage(credentials);
 
-        this.attach(login);
+            let layout = context.getResources().getIdentifier("login_default", "layout", context.getPackageName());
+
+            let layoutInflater = android.view.LayoutInflater;
+            let view: any = layoutInflater.from(context).inflate(layout, null);
+            let email = com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL;
+            view.setBasicAuthMethod(email);
+
+            let basic = com.liferay.mobile.screens.context.AuthenticationType.BASIC;
+            view.setAuthenticationType(basic);
+            login.assignView(view);
+
+            console.log("login rendered")
+
+            login.setListener(new com.liferay.mobile.screens.auth.login.LoginListener({
+                onLoginSuccess(user: any): void {
+                    console.log(user)
+                    self.router.navigate(['/gallery']);
+                },
+                onLoginFailure(error: any): void {
+                    console.log(error);
+                }
+            }));
+
+            this.attach(login);
+
+        } else {
+            console.log("iOS!!!!");
+
+            var text2 = new UILabel(CGRectMake(0, 20, 100, 30));
+            text2.text = "Hello iOS!";
+
+            console.log(text2.text);
+
+            app.ios.rootController.view.addSubview(text2);
+        }
     }
 
     attach(view) {
