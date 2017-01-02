@@ -7,12 +7,7 @@ declare let com: any;
 declare let LoginScreenlet: any;
 declare let CGRectMake: any;
 declare let NSObject: any;
-declare let BaseScreenlet: any;
-
 declare let LoginScreenletDelegate: any;
-declare let BaseScreenletDelegate: any;
-
-let colorModule = require("color");
 
 @Component({
     selector: "signup",
