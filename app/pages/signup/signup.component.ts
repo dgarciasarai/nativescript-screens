@@ -26,7 +26,6 @@ export class SignUpComponent implements OnInit {
     }
 
     ngOnInit() {
-
         // this.renderSignUp()
         this.renderLogin();
     }
@@ -76,73 +75,16 @@ export class SignUpComponent implements OnInit {
             console.log("login screenlet ios: " + login);
             console.log("theme name: " + login.themeName);
 
-            // optional func screenlet(screenlet: BaseScreenlet,
-            //     onLoginResponseUserAttributes attributes: [String:AnyObject])
-            // optional func screenlet(screenlet: BaseScreenlet,
-            //     onLoginError error: NSError)
-            // optional func screenlet(screenlet: BaseScreenlet,
-            //     onCredentialsSavedUserAttributes attributes: [String:AnyObject])
-            // optional func screenlet(screenlet: LoginScreenlet,
-            //     onCredentialsLoadedUserAttributes attributes: [String:AnyObject])
-
-            let obj = NSObject.extend({
-                init: function() {
-                    var self = this.super.init();
-                    if (self) {
-                        // The base class initialized successfully
-                        console.log("Initialized");
-                    }
-                    return self;
-                },
-                screenletOnLoginResponseUserAttributes(screenlet: any, attributes: any){
-                    console.log('1' + attributes)
-                    throw new Error('sdfjkasdfkjsad')
-                },
-                screenlet(screenlet, onLoginResponseUserAttributes){
-                    console.log('2' + onLoginResponseUserAttributes)
-                    throw new Error('sdfjkasdfkjsad')
-                },
-                // screenletOnLoginError(screenlet: any, error: any): void{
-                //     console.log('3' + error)
-                //     throw new Error('sdfjkasdfkjsad')
-                // },
-                // screenletOnCredentialsSavedUserAttributes(screenlet: any, attributes: any): void{
-                //     console.log('4' + attributes)
-                // },
-                // screenletOnCredentialsLoadedUserAttributes(screenlet: any, attributes: any): void{
-                //     console.log('5' + attributes)
-                // },
-            }, {
-                protocols: [LoginScreenletDelegate],
-                // exposedMethods: {
-                //     screenlet: {
-                //         returns: interop.types.void, params: [BaseScreenlet, interop.types.id]
-                //     },
-                //     screenletOnLoginResponseUserAttributes: {
-                //         returns: interop.types.void, params: [BaseScreenlet, interop.types.id]
-                //     },
-                //     screenletOnLoginError: {
-                //         returns: interop.types.void, params: [BaseScreenlet, interop.types.id]
-                //     },
-                //     screenletOnCredentialsSavedUserAttributes: {
-                //         returns: interop.types.void, params: [BaseScreenlet, interop.types.id]
-                //     },
-                //     screenletOnCredentialsLoadedUserAttributes: {
-                //         returns: interop.types.void, params: [BaseScreenlet, interop.types.id]
-                //     },
-                // }
-            })
-
-            // optional func screenlet(screenlet: BaseScreenlet, onLoginResponseUserAttributes attributes: [String:AnyObject])
-            // login.loginDelegate = obj;
-            login.delegate = new obj();
-            console.log(new obj())
-            // login.loginDelegate.screenlet = obj;
-            console.log(login.delegate);
-            // console.log(login.delegate.screenlet);
-            // login.delegate = obj;
-
             app.ios.rootController.view.addSubview(login);
+
+            let delegate = NSObject.extend({
+                screenletOnLoginResponseUserAttributes(screenlet, attributes){
+                    console.log(attributes)
+                }
+            }, {protocols: [LoginScreenletDelegate]});
+
+            login.delegate = new delegate();
+            console.log(login.delegate);
         }
     }
 
