@@ -6,6 +6,11 @@ import app = require("application");
 declare let com: any;
 declare let LoginScreenlet: any;
 declare let CGRectMake: any;
+declare let NSObject: any;
+declare let BaseScreenlet: any;
+
+declare let LoginScreenletDelegate: any;
+declare let BaseScreenletDelegate: any;
 
 let colorModule = require("color");
 
@@ -21,7 +26,6 @@ export class SignUpComponent implements OnInit {
     }
 
     ngOnInit() {
-
         // this.renderSignUp()
         this.renderLogin();
     }
@@ -49,11 +53,11 @@ export class SignUpComponent implements OnInit {
             view.setAuthenticationType(basic);
             login.assignView(view);
 
-            console.log("login rendered")
+            console.log("login rendered");
 
             login.setListener(new com.liferay.mobile.screens.auth.login.LoginListener({
                 onLoginSuccess(user: any): void {
-                    console.log(user)
+                    console.log(user);
                     self.router.navigate(['/gallery']);
                 },
                 onLoginFailure(error: any): void {
@@ -72,8 +76,18 @@ export class SignUpComponent implements OnInit {
             console.log("theme name: " + login.themeName);
 
             app.ios.rootController.view.addSubview(login);
+
+            let delegate = NSObject.extend({
+                screenletOnLoginResponseUserAttributes(screenlet, attributes){
+                    console.log(attributes)
+                }
+            }, {protocols: [LoginScreenletDelegate]});
+
+            login.delegate = new delegate();
+            console.log(login.delegate);
         }
     }
+
 
     attach(view) {
         let context = app.android.context;
