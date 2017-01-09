@@ -58,7 +58,7 @@ export class ImageGalleryComponent implements OnInit {
 
             let superview = app.ios.rootController.view;
 
-            gallery = new ImageGalleryScreenlet(CGRectMake(0, 20, 375, 667));
+            gallery = new ImageGalleryScreenlet(CGRectMake(0, 20, 375, 642));
             gallery.repositoryId = this.screensContext.GROUP_ID;
             gallery.folderId = this.screensContext.IMAGE_GALLERY_FOLDER_ID;
             gallery.autoload = true;
