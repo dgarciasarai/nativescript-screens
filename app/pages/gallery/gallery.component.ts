@@ -45,7 +45,7 @@ export class ImageGalleryComponent implements OnInit {
             picasso.setCachePolicy(remoteOnly);
             let localeUS = java.util.Locale.US;
             gallery.setLocale(localeUS);
-            let layout = context.getResources().getIdentifier("gallery_custom", "layout", context.getPackageName());
+            let layout = context.getResources().getIdentifier("gallery_default_slideshow", "layout", context.getPackageName());
 
             gallery.render(layout);
 
@@ -58,7 +58,7 @@ export class ImageGalleryComponent implements OnInit {
 
             let superview = app.ios.rootController.view;
 
-            gallery = new ImageGalleryScreenlet(CGRectMake(0, 20, 375, 642));
+            gallery = new ImageGalleryScreenlet(CGRectMake(0, 20, 375, 642), "default-list");
             gallery.repositoryId = this.screensContext.GROUP_ID;
             gallery.folderId = this.screensContext.IMAGE_GALLERY_FOLDER_ID;
             gallery.autoload = true;
