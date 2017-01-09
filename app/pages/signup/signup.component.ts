@@ -67,7 +67,7 @@ export class SignUpComponent implements OnInit {
 
             let superview = app.ios.rootController.view;
 
-            login = new LoginScreenlet(CGRectMake(0, 20, 300, 500));
+            login = new LoginScreenlet(CGRectMake(20, 40, 335, 617));
 
             console.log("login screenlet ios: " + login);
             console.log("theme name: " + login.themeName);
