@@ -77,6 +77,7 @@ export class SignUpComponent implements OnInit {
             let delegate = NSObject.extend({
                 screenletOnLoginResponseUserAttributes(screenlet, attributes){
                     console.log(attributes)
+                    self.router.navigate(['/gallery']);
                 }
             }, {protocols: [LoginScreenletDelegate]});
 
