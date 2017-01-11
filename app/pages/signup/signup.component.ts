@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
             let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
             login.setCredentialsStorage(credentials);
 
-            let layout = context.getResources().getIdentifier("login_default", "layout", context.getPackageName());
+            let layout = context.getResources().getIdentifier("login_westeros", "layout", context.getPackageName());
 
             let layoutInflater = android.view.LayoutInflater;
             let view: any = layoutInflater.from(context).inflate(layout, null);
