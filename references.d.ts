@@ -3,8 +3,6 @@
 /// <reference path="./node_modules/tns-platform-declarations/ios/ios.d.ts" />
 /// <reference path="./node_modules/tns-platform-declarations/android.d.ts" />
 
-/// <reference path="./app/screens.d.ts" />
-
 declare type Location = any;
 declare type Node = any;
 declare type Document = any;
