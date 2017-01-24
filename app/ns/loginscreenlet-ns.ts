@@ -8,27 +8,26 @@ declare let LoginScreenlet: any;
 
 @Component({
     selector: "loginscreenlet",
-    providers: [ScreensContext],
     template: ``
 })
-export class LoginScreenletNs {
+export class LoginScreenletWrapper {
 
     public login: any;
     public view: any;
 
-    constructor(private screensContext: ScreensContext) {
-        this.createScreenlet("default");
+    constructor() {
     }
 
-    createScreenlet(theme) {
+    createScreenlet(theme, authMethod, authType) {
         if (app.android) {
             this.login = new com.liferay.mobile.screens.auth.login.LoginScreenlet(app.android.context);
             let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
             this.login.setCredentialsStorage(credentials);
 
             this.setLayout("login_" + theme);
-            this.setAuthMethod(com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL);
-            this.setAuthType(com.liferay.mobile.screens.context.AuthenticationType.BASIC);
+            this.setAuthMethod(authMethod);
+            this.setAuthType(authType);
+            this.attach();
         } else {
             let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
             let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
@@ -39,7 +38,15 @@ export class LoginScreenletNs {
         }
     }
 
-    attach() {
+    setDelegate(delegate) {
+        this.getScreenlet().delegate = delegate;
+    }
+
+     setListener(listener) {
+      this.getScreenlet().setListener(listener);
+    }
+
+    private attach() {
         let containerId = app.android.context.getResources().getIdentifier("content", "id", "android");
         let activity = app.android.foregroundActivity;
         let container = activity.findViewById(containerId);
@@ -47,28 +54,23 @@ export class LoginScreenletNs {
         container.addView(this.view, matchParent, matchParent);
     }
 
-    getScreenlet() {
+    private getScreenlet() {
         return this.login;
     }
 
-    setLayout(loginLayout) {
+    private setLayout(loginLayout) {
+        console.log("login theme android: " + loginLayout);
         let layout = app.android.context.getResources().getIdentifier(loginLayout, "layout", app.android.context.getPackageName());
         let layoutInflater = android.view.LayoutInflater;
         this.view = layoutInflater.from(app.android.context).inflate(layout, null);
     }
 
-    setAuthType(authType) {
+    private setAuthType(authType) {
         this.view.setAuthenticationType(authType);
     }
 
-    setAuthMethod(authMethod) {
+    private setAuthMethod(authMethod) {
         this.view.setBasicAuthMethod(authMethod);
     }
 
-    setListener(listener) {
-        if (this.login != null) {
-            console.log(listener);
-            this.getScreenlet().setListener(listener);
-        }
-    }
 }
