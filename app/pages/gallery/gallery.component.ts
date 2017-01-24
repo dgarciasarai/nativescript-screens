@@ -2,11 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { ScreensContext } from "../../shared/context/screens-context.service";
 import app = require("application");
 
-declare var com: any;
-declare var NSObject: any;
-declare var CGRectMake: any;
-declare var ImageGalleryScreenlet: any;
-declare var ImageGalleryScreenletDelegate: any;
+declare let com: any;
+
+declare let ImageGalleryScreenlet: any;
 
 @Component({
     selector: "gallery",

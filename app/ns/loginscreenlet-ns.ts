@@ -3,7 +3,7 @@ import {ScreensContext} from "../shared/context/screens-context.service";
 import app = require('application');
 
 declare let com: any;
-declare let CGRectMake: any;
+
 declare let LoginScreenlet: any;
 
 @Component({
