@@ -12,10 +12,14 @@ declare let LoginScreenlet: any;
 })
 export class LoginScreenletWrapper {
 
-    public login: any;
-    public view: any;
+    private login: any;
+    private view: any;
 
     constructor() {
+    }
+
+    createDefaultScreenlet() {
+        this.createScreenlet(null, null, null);
     }
 
     createScreenlet(theme, authMethod, authType) {
@@ -24,9 +28,9 @@ export class LoginScreenletWrapper {
             let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
             this.login.setCredentialsStorage(credentials);
 
-            this.setLayout("login_" + theme);
-            this.setAuthMethod(authMethod);
-            this.setAuthType(authType);
+            this.setLayout(theme, "default");
+            this.setAuthMethod(authMethod, com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL);
+            this.setAuthType(authType, com.liferay.mobile.screens.context.AuthenticationType.BASIC);
             this.attach();
         } else {
             let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
@@ -58,18 +62,26 @@ export class LoginScreenletWrapper {
         return this.login;
     }
 
-    private setLayout(loginLayout) {
-        console.log("login theme android: " + loginLayout);
-        let layout = app.android.context.getResources().getIdentifier(loginLayout, "layout", app.android.context.getPackageName());
+    private setLayout(loginLayout, defaultLayout) {
+        if(loginLayout == null || loginLayout == "") {
+            loginLayout = defaultLayout;
+        }
+        let layout = app.android.context.getResources().getIdentifier("login_" + loginLayout, "layout", app.android.context.getPackageName());
         let layoutInflater = android.view.LayoutInflater;
         this.view = layoutInflater.from(app.android.context).inflate(layout, null);
     }
 
-    private setAuthType(authType) {
+    private setAuthType(authType, defaultAuthType) {
+        if(authType == null) {
+            authType = defaultAuthType;
+        }
         this.view.setAuthenticationType(authType);
     }
 
-    private setAuthMethod(authMethod) {
+    private setAuthMethod(authMethod, defaultAuthMethod) {
+        if(authMethod == null) {
+            authMethod = defaultAuthMethod;
+        }
         this.view.setBasicAuthMethod(authMethod);
     }
 

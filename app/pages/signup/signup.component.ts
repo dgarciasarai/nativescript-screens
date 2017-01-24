@@ -18,11 +18,7 @@ declare let LoginScreenletDelegate: any;
 export class SignUpComponent implements OnInit {
 
     constructor(private router: Router, private screensContext: ScreensContext, private loginScreenlet: LoginScreenletWrapper) {
-        if (app.android) {
-            this.loginScreenlet.createScreenlet("westeros", com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL, com.liferay.mobile.screens.context.AuthenticationType.BASIC);
-        } else {
-            this.loginScreenlet.createScreenlet("demo", null, null);
-        }
+        this.loginScreenlet.createDefaultScreenlet();
     }
 
     ngOnInit() {
