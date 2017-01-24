@@ -55,8 +55,11 @@ export class ImageGalleryComponent implements OnInit {
             console.log("iOS!!!!");
 
             let superview = app.ios.rootController.view;
+            let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
+            let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
+            let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
 
-            gallery = new ImageGalleryScreenlet(CGRectMake(0, 20, 375, 642), "default-list");
+            gallery = new ImageGalleryScreenlet(CGRectMake(0, statusBarHeight, screenWidth, screenHeigt), "default-list");
             gallery.repositoryId = this.screensContext.GROUP_ID;
             gallery.folderId = this.screensContext.IMAGE_GALLERY_FOLDER_ID;
             gallery.autoload = true;

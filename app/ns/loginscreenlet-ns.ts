@@ -30,7 +30,11 @@ export class LoginScreenletNs {
             this.setAuthMethod(com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL);
             this.setAuthType(com.liferay.mobile.screens.context.AuthenticationType.BASIC);
         } else {
-            this.login = new LoginScreenlet(CGRectMake(20, 40, 335, 617), theme);
+            let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
+            let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
+            let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
+
+            this.login = new LoginScreenlet(CGRectMake(20, statusBarHeight * 2, screenWidth - 40, screenHeigt - statusBarHeight), theme);
             app.ios.rootController.view.addSubview(this.login);
         }
     }
