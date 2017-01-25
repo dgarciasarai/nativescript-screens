@@ -33,8 +33,19 @@ export class LoginScreenletWrapper {
             this.login.setCredentialsStorage(credentials);
 
             this.setLayout(theme);
-            this.setAuthMethod(authMethod);
-            this.setAuthType(authType);
+
+            if (authMethod == null) {
+                this.setAuthMethod(com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL);
+            } else {
+                this.setAuthMethod(authMethod);
+            }
+
+            if (authType == null) {
+                this.setAuthType(com.liferay.mobile.screens.context.AuthenticationType.BASIC);
+            } else {
+                this.setAuthType(authType);
+            }
+
             this.attach();
         } else {
             let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
