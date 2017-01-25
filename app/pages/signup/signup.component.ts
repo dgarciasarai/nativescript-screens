@@ -26,17 +26,17 @@ export class SignUpComponent implements OnInit {
     }
 
     renderLogin() {
-        console.log('trying to render login' + app);
+        console.log('trying to render login: ' + app);
 
         let self = this;
         
         if (app.android) {            
             this.loginScreenlet.setListener(new com.liferay.mobile.screens.auth.login.LoginListener({
                 onLoginSuccess(user: any): void {
-                    console.log(user);
+                    console.log("Login successful by user: " + user);
                     self.router.navigate(["/gallery"]);
                 },
-                onLoginFailure(error: any): void {
+                onLoginFailure(error: java.lang.Exception): void {
                     console.log(error);
                 }
             }));
@@ -44,7 +44,7 @@ export class SignUpComponent implements OnInit {
             console.log("iOS!!!!" + app.ios);
             let delegate = NSObject.extend({
                 screenletOnLoginResponseUserAttributes(screenlet, attributes){
-                    console.log(attributes)
+                    console.log("Login successful by user: " + attributes);
                     self.router.navigate(['/gallery']);
                 }
             }, {protocols: [LoginScreenletDelegate]});
