@@ -7,7 +7,7 @@ declare let com: any;
 declare let LoginScreenlet: any;
 
 @Component({
-    selector: "loginscreenlet",
+    selector: "loginscreenletwrapper",
     template: ``
 })
 export class LoginScreenletWrapper {
@@ -19,7 +19,11 @@ export class LoginScreenletWrapper {
     }
 
     createDefaultScreenlet() {
-        this.createScreenlet(null, null, null);
+        if (app.ios) {
+            this.createScreenlet("default", null, null);
+        } else {
+            this.createScreenlet("default", com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL, com.liferay.mobile.screens.context.AuthenticationType.BASIC);
+        }
     }
 
     createScreenlet(theme, authMethod, authType) {
@@ -28,16 +32,16 @@ export class LoginScreenletWrapper {
             let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
             this.login.setCredentialsStorage(credentials);
 
-            this.setLayout(theme, "default");
-            this.setAuthMethod(authMethod, com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL);
-            this.setAuthType(authType, com.liferay.mobile.screens.context.AuthenticationType.BASIC);
+            this.setLayout(theme);
+            this.setAuthMethod(authMethod);
+            this.setAuthType(authType);
             this.attach();
         } else {
             let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
             let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
             let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
 
-            this.login = new LoginScreenlet(CGRectMake(20, statusBarHeight * 2, screenWidth - 40, screenHeigt - statusBarHeight), theme);
+            this.login = new LoginScreenlet(CGRectMake(20, statusBarHeight * 2, screenWidth - 40, screenHeigt), theme);
             app.ios.rootController.view.addSubview(this.login);
         }
     }
@@ -46,7 +50,7 @@ export class LoginScreenletWrapper {
         this.getScreenlet().delegate = delegate;
     }
 
-     setListener(listener) {
+    setListener(listener) {
       this.getScreenlet().setListener(listener);
     }
 
@@ -62,26 +66,17 @@ export class LoginScreenletWrapper {
         return this.login;
     }
 
-    private setLayout(loginLayout, defaultLayout) {
-        if(loginLayout == null || loginLayout == "") {
-            loginLayout = defaultLayout;
-        }
+    private setLayout(loginLayout) {
         let layout = app.android.context.getResources().getIdentifier("login_" + loginLayout, "layout", app.android.context.getPackageName());
         let layoutInflater = android.view.LayoutInflater;
         this.view = layoutInflater.from(app.android.context).inflate(layout, null);
     }
 
-    private setAuthType(authType, defaultAuthType) {
-        if(authType == null) {
-            authType = defaultAuthType;
-        }
+    private setAuthType(authType) {
         this.view.setAuthenticationType(authType);
     }
 
-    private setAuthMethod(authMethod, defaultAuthMethod) {
-        if(authMethod == null) {
-            authMethod = defaultAuthMethod;
-        }
+    private setAuthMethod(authMethod) {
         this.view.setBasicAuthMethod(authMethod);
     }
 
