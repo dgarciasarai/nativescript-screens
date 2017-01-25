@@ -33,6 +33,8 @@ export class ImageGalleryScreenletWrapper {
         if (app.android) {
             this.imageGallery = new com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet(app.android.context);
             
+            this.initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy);
+
             this.setLayout(theme);
 
             this.attach();
