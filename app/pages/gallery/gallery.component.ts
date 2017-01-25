@@ -34,7 +34,9 @@ export class ImageGalleryComponent implements OnInit {
         } else {
             console.log("iOS!!!!" + app.ios);
             let delegate = NSObject.extend({
-                /* delegate methods */
+                screenletOnImageEntrySelected(screenlet, imageEntry){
+                    console.log("You have selected imageEntry: " + imageEntry.debugDescription);
+                }
             }, {protocols: [ImageGalleryScreenletDelegate]});
 
             this.imageGalleryScreenlet.setDelegate(new delegate());
