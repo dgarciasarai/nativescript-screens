@@ -49,6 +49,8 @@ export class LoginScreenletWrapper {
             } else {
                 this.setAuthType(authType);
             }
+            this.view.setScreenlet(this.getScreenlet());
+            this.getScreenlet().setViewModel(this.view);
 
             this.attach();
         } else {
