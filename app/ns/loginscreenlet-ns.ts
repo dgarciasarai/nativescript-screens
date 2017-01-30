@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {ScreensContext} from "../shared/context/screens-context.service";
 import app = require('application');
 
 declare let com: any;
@@ -30,25 +29,17 @@ export class LoginScreenletWrapper {
         }
     }
 
-    createScreenlet(size, theme, authMethod, authType) {
+    createScreenlet(size, theme, authMethod = com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL, authType = com.liferay.mobile.screens.context.AuthenticationType.BASIC) {
         if (app.android) {
             this.login = new com.liferay.mobile.screens.auth.login.LoginScreenlet(app.android.context);
-            let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
-            this.login.setCredentialsStorage(credentials);
+            this.login.setCredentialsStorage(com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE);
 
             this.setLayout(theme);
+            this.setAuthMethod(authMethod);
+            this.setAuthType(authType);
 
-            if (authMethod == null) {
-                this.setAuthMethod(com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL);
-            } else {
-                this.setAuthMethod(authMethod);
-            }
-
-            if (authType == null) {
-                this.setAuthType(com.liferay.mobile.screens.context.AuthenticationType.BASIC);
-            } else {
-                this.setAuthType(authType);
-            }
+            this.view.setScreenlet(this.getScreenlet());
+            this.getScreenlet().setViewModel(this.view);
 
             this.attach();
         } else {
@@ -62,7 +53,7 @@ export class LoginScreenletWrapper {
     }
 
     setListener(listener) {
-      this.getScreenlet().setListener(listener);
+        this.getScreenlet().setListener(listener);
     }
 
     private attach() {
@@ -80,7 +71,10 @@ export class LoginScreenletWrapper {
     private setLayout(loginLayout) {
         let layout = app.android.context.getResources().getIdentifier("login_" + loginLayout, "layout", app.android.context.getPackageName());
         let layoutInflater = android.view.LayoutInflater;
-        this.view = layoutInflater.from(app.android.context).inflate(layout, null);
+
+        let defaultTheme = app.android.context.getResources().getIdentifier(loginLayout + "_theme", "style", app.android.context.getPackageName())
+        let context = new android.view.ContextThemeWrapper(app.android.context, defaultTheme);
+        this.view = layoutInflater.from(context).inflate(layout, null);
     }
 
     private setAuthType(authType) {
