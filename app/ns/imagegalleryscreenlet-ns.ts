@@ -88,6 +88,7 @@ export class ImageGalleryScreenletWrapper {
         let activity = app.android.foregroundActivity;
         let container = activity.findViewById(containerId);
         let matchParent = android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
+        container.removeAllViews();
         container.addView(this.view, matchParent, matchParent);
     }
 
