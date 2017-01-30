@@ -18,7 +18,15 @@ declare let LoginScreenletDelegate: any;
 export class SignUpComponent implements OnInit {
 
     constructor(private router: Router, private screensContext: ScreensContext, private loginScreenlet: LoginScreenletWrapper) {
-        this.loginScreenlet.createDefaultScreenlet();
+        if(app.android) {
+            this.loginScreenlet.createScreenlet(null, "westeros", null, null);
+        } else {
+            let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
+            let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
+            let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
+
+            this.loginScreenlet.createScreenlet(CGRectMake(0, statusBarHeight, screenWidth, screenHeigt), "demo", null, null);
+        }
     }
 
     ngOnInit() {

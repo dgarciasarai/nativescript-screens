@@ -20,13 +20,17 @@ export class LoginScreenletWrapper {
 
     createDefaultScreenlet() {
         if (app.ios) {
-            this.createScreenlet("default", null, null);
+            let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
+            let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
+            let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
+            
+            this.createScreenlet(CGRectMake(0, statusBarHeight * 2, screenWidth, screenHeigt), "default", null, null);
         } else {
-            this.createScreenlet("default", com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL, com.liferay.mobile.screens.context.AuthenticationType.BASIC);
+            this.createScreenlet(null, "default", com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL, com.liferay.mobile.screens.context.AuthenticationType.BASIC);
         }
     }
 
-    createScreenlet(theme, authMethod, authType) {
+    createScreenlet(size, theme, authMethod, authType) {
         if (app.android) {
             this.login = new com.liferay.mobile.screens.auth.login.LoginScreenlet(app.android.context);
             let credentials = com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE;
@@ -48,11 +52,7 @@ export class LoginScreenletWrapper {
 
             this.attach();
         } else {
-            let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
-            let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
-            let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
-
-            this.login = new LoginScreenlet(CGRectMake(20, statusBarHeight * 2, screenWidth - 40, screenHeigt), theme);
+            this.login = new LoginScreenlet(size, theme);
             app.ios.rootController.view.addSubview(this.login);
         }
     }

@@ -22,14 +22,19 @@ export class ImageGalleryScreenletWrapper {
         let cachePolicy;
         if (app.android) {
             cachePolicy = com.liferay.mobile.screens.cache.CachePolicy.REMOTE_ONLY;
+            
+            this.createScreenlet(null, "default_grid", 10, 10, true, cachePolicy);
         } else {
             cachePolicy = "remote-only";
-        }
+            let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
+            let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
+            let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
 
-        this.createScreenlet("default_grid", 10, 10, true, cachePolicy);
+            this.createScreenlet(CGRectMake(0, statusBarHeight, screenWidth, screenHeigt), "default-grid", 10, 10, true, cachePolicy);
+        }
     }
 
-    createScreenlet(theme, pageSize, firstPageSize, autoload, cachePolicy) {
+    createScreenlet(size, theme, pageSize, firstPageSize, autoload, cachePolicy) {
         if (app.android) {
             this.imageGallery = new com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet(app.android.context);
             
@@ -40,11 +45,7 @@ export class ImageGalleryScreenletWrapper {
             this.attach();
 
         } else {
-            let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
-            let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
-            let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
-
-            this.imageGallery = new ImageGalleryScreenlet(CGRectMake(0, statusBarHeight, screenWidth, screenHeigt), theme);
+            this.imageGallery = new ImageGalleryScreenlet(size, theme);
 
             this.initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy);
 

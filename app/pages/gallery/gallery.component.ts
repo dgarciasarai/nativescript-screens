@@ -17,7 +17,15 @@ declare let ImageGalleryScreenletDelegate: any;
 export class ImageGalleryComponent implements OnInit {
     
     constructor(private router: Router, private screensContext: ScreensContext, private imageGalleryScreenlet: ImageGalleryScreenletWrapper) {
-        this.imageGalleryScreenlet.createDefaultScreenlet();
+        if(app.android) {
+            this.imageGalleryScreenlet.createDefaultScreenlet();
+        } else {
+            let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
+            let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;
+            let screenHeigt = UIScreen.mainScreen.applicationFrame.size.height;
+            
+            this.imageGalleryScreenlet.createScreenlet(CGRectMake(0, statusBarHeight, screenWidth, screenHeigt), "default-slideshow", 10, 10, true, "remote-only");
+        }
     }
 
     ngOnInit() {
