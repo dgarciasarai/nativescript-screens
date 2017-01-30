@@ -71,7 +71,10 @@ export class LoginScreenletWrapper {
     private setLayout(loginLayout) {
         let layout = app.android.context.getResources().getIdentifier("login_" + loginLayout, "layout", app.android.context.getPackageName());
         let layoutInflater = android.view.LayoutInflater;
-        this.view = layoutInflater.from(app.android.context).inflate(layout, null);
+
+        let defaultTheme = app.android.context.getResources().getIdentifier(loginLayout + "_theme", "style", app.android.context.getPackageName())
+        let context = new android.view.ContextThemeWrapper(app.android.context, defaultTheme);
+        this.view = layoutInflater.from(context).inflate(layout, null);
     }
 
     private setAuthType(authType) {

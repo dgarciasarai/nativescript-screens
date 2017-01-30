@@ -23,7 +23,7 @@ export class ImageGalleryScreenletWrapper {
         if (app.android) {
             cachePolicy = com.liferay.mobile.screens.cache.CachePolicy.REMOTE_ONLY;
             
-            this.createScreenlet(null, "default_grid", 10, 10, true, cachePolicy);
+            this.createScreenlet(null, "default", 10, 10, true, cachePolicy);
         } else {
             cachePolicy = "remote-only";
             let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
@@ -98,6 +98,7 @@ export class ImageGalleryScreenletWrapper {
     private setLayout(imageGalleryLayout) {
         let layout = app.android.context.getResources().getIdentifier("gallery_" + imageGalleryLayout, "layout", app.android.context.getPackageName());
         let layoutInflater = android.view.LayoutInflater;
-        this.view = layoutInflater.from(app.android.context).inflate(layout, null);
+
+        this.view = layoutInflater.from(app.android.foregroundActivity).inflate(layout, null);
     }
 }
