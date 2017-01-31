@@ -66,7 +66,6 @@ export class ImageGalleryScreenletWrapper {
             this.imageGallery.setRepositoryId(this.screensContext.GROUP_ID);
             this.imageGallery.setFolderId(this.screensContext.IMAGE_GALLERY_FOLDER_ID);
             this.imageGallery.setAutoLoad(autoload);
-            this.imageGallery.setGroupId(this.screensContext.GROUP_ID);
             this.imageGallery.setFirstPageSize(firstPageSize);
             this.imageGallery.setPageSize(pageSize);
              this.imageGallery.setCachePolicy(cachePolicy);
@@ -76,7 +75,6 @@ export class ImageGalleryScreenletWrapper {
             this.imageGallery.repositoryId = this.screensContext.GROUP_ID;
             this.imageGallery.folderId = this.screensContext.IMAGE_GALLERY_FOLDER_ID;
             this.imageGallery.autoload = autoload;
-            this.imageGallery.groupId = this.screensContext.GROUP_ID;
             this.imageGallery.firstPageSize = firstPageSize;
             this.imageGallery.pageSize = pageSize;
             this.imageGallery.offlinePolicy = cachePolicy;
