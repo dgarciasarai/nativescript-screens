@@ -57,7 +57,7 @@ export class ImageGalleryScreenletWrapper {
     }
 
     setListener(listener) {
-      this.getScreenlet().setListener(listener);
+        this.getScreenlet().setListener(listener);
     }
 
     private initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy) {
@@ -67,7 +67,7 @@ export class ImageGalleryScreenletWrapper {
             this.imageGallery.setAutoLoad(autoload);
             this.imageGallery.setFirstPageSize(firstPageSize);
             this.imageGallery.setPageSize(pageSize);
-             this.imageGallery.setCachePolicy(cachePolicy);
+            this.imageGallery.setCachePolicy(cachePolicy);
             let picasso = com.liferay.mobile.screens.context.PicassoScreens;
             picasso.setCachePolicy(cachePolicy);
         } else {
