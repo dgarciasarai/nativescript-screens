@@ -22,7 +22,7 @@ export class ImageGalleryScreenletWrapper {
         let cachePolicy;
         if (app.android) {
             cachePolicy = com.liferay.mobile.screens.cache.CachePolicy.REMOTE_ONLY;
-            
+
             this.createScreenlet(null, "default", 10, 10, true, cachePolicy);
         } else {
             cachePolicy = "remote-only";
@@ -36,14 +36,13 @@ export class ImageGalleryScreenletWrapper {
 
     createScreenlet(size, theme, pageSize, firstPageSize, autoload, cachePolicy) {
         if (app.android) {
-            this.imageGallery = new com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet(app.android.context);
-            
-            this.initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy);
+            this.imageGallery = new com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet(app.android.foregroundActivity);
 
+            this.initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy);
             this.setLayout(theme);
 
-            this.attach();
 
+            this.attach();
         } else {
             this.imageGallery = new ImageGalleryScreenlet(size, theme);
 
