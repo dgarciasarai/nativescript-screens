@@ -43,6 +43,7 @@ export class ImageGalleryScreenletWrapper {
 
 
             this.attach();
+            this.imageGallery.load();
         } else {
             this.imageGallery = new ImageGalleryScreenlet(size, theme);
 
