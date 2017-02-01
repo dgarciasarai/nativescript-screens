@@ -91,8 +91,8 @@ export class ImageGalleryScreenletWrapper {
     }
 
     private attach() {
-        let containerId = app.android.context.getResources().getIdentifier("content", "id", "android");
         let activity = app.android.foregroundActivity;
+        let containerId = activity.getResources().getIdentifier("content", "id", "android");
         let container = activity.findViewById(containerId);
         let matchParent = android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
         container.removeAllViews();
