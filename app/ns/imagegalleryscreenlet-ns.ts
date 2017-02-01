@@ -71,6 +71,9 @@ export class ImageGalleryScreenletWrapper {
             this.imageGallery.setFirstPageSize(firstPageSize);
             this.imageGallery.setPageSize(pageSize);
             this.imageGallery.setCachePolicy(cachePolicy);
+            this.imageGallery.setGroupId(this.screensContext.GROUP_ID);
+
+
             let localeUS = com.liferay.mobile.screens.util.LiferayLocale.getDefaultLocale();
             this.imageGallery.setLocale(localeUS);
             let picasso = com.liferay.mobile.screens.context.PicassoScreens;
