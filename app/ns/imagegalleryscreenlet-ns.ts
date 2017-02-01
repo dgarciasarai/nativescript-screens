@@ -71,8 +71,12 @@ export class ImageGalleryScreenletWrapper {
             this.imageGallery.setFirstPageSize(firstPageSize);
             this.imageGallery.setPageSize(pageSize);
             this.imageGallery.setCachePolicy(cachePolicy);
+            let localeUS = com.liferay.mobile.screens.util.LiferayLocale.getDefaultLocale();
+            this.imageGallery.setLocale(localeUS);
             let picasso = com.liferay.mobile.screens.context.PicassoScreens;
             picasso.setCachePolicy(cachePolicy);
+
+
         } else {
             this.imageGallery.repositoryId = this.screensContext.GROUP_ID;
             this.imageGallery.folderId = this.screensContext.IMAGE_GALLERY_FOLDER_ID;
