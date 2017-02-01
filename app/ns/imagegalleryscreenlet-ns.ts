@@ -41,6 +41,8 @@ export class ImageGalleryScreenletWrapper {
             this.initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy);
             this.setLayout(theme);
 
+            this.view.setScreenlet(this.getScreenlet());
+            this.getScreenlet().setViewModel(this.view);
 
             this.attach();
             this.imageGallery.load();
