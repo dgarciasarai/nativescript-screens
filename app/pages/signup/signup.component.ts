@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
 
     constructor(private router: Router, private screensContext: ScreensContext, private loginScreenlet: LoginScreenletWrapper) {
         if(app.android) {
-            this.loginScreenlet.createScreenlet(null, "westeros", null, null);
+            this.loginScreenlet.createDefaultScreenlet();
         } else {
             let statusBarHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
             let screenWidth = UIScreen.mainScreen.applicationFrame.size.width;

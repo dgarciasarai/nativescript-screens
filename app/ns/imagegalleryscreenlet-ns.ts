@@ -22,7 +22,7 @@ export class ImageGalleryScreenletWrapper {
         let cachePolicy;
         if (app.android) {
             cachePolicy = com.liferay.mobile.screens.cache.CachePolicy.REMOTE_ONLY;
-            
+
             this.createScreenlet(null, "default", 10, 10, true, cachePolicy);
         } else {
             cachePolicy = "remote-only";
@@ -36,14 +36,16 @@ export class ImageGalleryScreenletWrapper {
 
     createScreenlet(size, theme, pageSize, firstPageSize, autoload, cachePolicy) {
         if (app.android) {
-            this.imageGallery = new com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet(app.android.context);
-            
-            this.initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy);
+            this.imageGallery = new com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet(app.android.foregroundActivity);
 
+            this.initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy);
             this.setLayout(theme);
 
-            this.attach();
+            this.view.setScreenlet(this.getScreenlet());
+            this.getScreenlet().setViewModel(this.view);
 
+            this.attach();
+            this.imageGallery.load();
         } else {
             this.imageGallery = new ImageGalleryScreenlet(size, theme);
 
@@ -58,7 +60,7 @@ export class ImageGalleryScreenletWrapper {
     }
 
     setListener(listener) {
-      this.getScreenlet().setListener(listener);
+        this.getScreenlet().setListener(listener);
     }
 
     private initImageGalleryAttributes(firstPageSize, pageSize, autoload, cachePolicy) {
@@ -68,9 +70,16 @@ export class ImageGalleryScreenletWrapper {
             this.imageGallery.setAutoLoad(autoload);
             this.imageGallery.setFirstPageSize(firstPageSize);
             this.imageGallery.setPageSize(pageSize);
-             this.imageGallery.setCachePolicy(cachePolicy);
+            this.imageGallery.setCachePolicy(cachePolicy);
+            this.imageGallery.setGroupId(this.screensContext.GROUP_ID);
+
+
+            let localeUS = com.liferay.mobile.screens.util.LiferayLocale.getDefaultLocale();
+            this.imageGallery.setLocale(localeUS);
             let picasso = com.liferay.mobile.screens.context.PicassoScreens;
             picasso.setCachePolicy(cachePolicy);
+
+
         } else {
             this.imageGallery.repositoryId = this.screensContext.GROUP_ID;
             this.imageGallery.folderId = this.screensContext.IMAGE_GALLERY_FOLDER_ID;
@@ -82,8 +91,8 @@ export class ImageGalleryScreenletWrapper {
     }
 
     private attach() {
-        let containerId = app.android.context.getResources().getIdentifier("content", "id", "android");
         let activity = app.android.foregroundActivity;
+        let containerId = activity.getResources().getIdentifier("content", "id", "android");
         let container = activity.findViewById(containerId);
         let matchParent = android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
         container.removeAllViews();

@@ -29,7 +29,7 @@ export class LoginScreenletWrapper {
         }
     }
 
-    createScreenlet(size, theme, authMethod = com.liferay.mobile.screens.auth.BasicAuthMethod.EMAIL, authType = com.liferay.mobile.screens.context.AuthenticationType.BASIC) {
+    createScreenlet(size, theme, authMethod, authType) {
         if (app.android) {
             this.login = new com.liferay.mobile.screens.auth.login.LoginScreenlet(app.android.context);
             this.login.setCredentialsStorage(com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder.StorageType.NONE);
