@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
 import app = require("application");
 
