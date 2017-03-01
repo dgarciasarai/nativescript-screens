@@ -19,3 +19,6 @@
   ```
 * Clone this repo in your computer with `git clone git@github.com:dgarciasarai/nativescript-screens.git`.
 * Move to the repo folder and run `tns run android` for Android and `tns run ios` for iOS.
+
+![Nativescript in Android](/img/nativescript-android.gif)
+![Nativescript in iOS](/img/nativescript-ios.gif)
