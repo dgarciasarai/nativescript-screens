@@ -1,5 +1,7 @@
 # Proof of Concept: Nativescript + Liferay Screens
 
+_This is just a proof of concept. It's nothing official in Liferay Inc. If you want to contribute, you can open a pull request and i will review it._
+
 ## Installation
 
 * Check your `Node.js` version with `node --version`. If you have at least v6, please go to the third step.
